@@ -1,5 +1,10 @@
 # NexFeed
 
+
+https://github.com/user-attachments/assets/6594f8fe-338c-4150-b691-641aae3e1fef
+
+[Live Link](https://nexfeed.vercel.app/)
+
 ## Introduction
 
 In today's digital marketplace, consumer feedback is essential for product improvement and customer satisfaction. Traditional feedback systems often lack transparency and can be influenced by biases. To address these issues, we present NexFeed, a decentralized application that empowers users to share their opinions on products while ensuring that all interactions are secure, transparent, and immutable.
