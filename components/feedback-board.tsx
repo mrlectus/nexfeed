@@ -23,11 +23,30 @@ import { useToast } from "./ui/use-toast";
 import { match } from "ts-pattern";
 import { Skeleton } from "./ui/skeleton";
 import Link from "next/link";
+import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
+import React from "react";
+import clsx from "clsx";
 export default function FeedBackBoard({ id }: { id: bigint }) {
+  const [tags, setTags] = useQueryState("tags", parseAsArrayOf(parseAsString));
+  const [sort, setSort] = useQueryState("sort", {
+    defaultValue: "acc",
+  });
   const product = useGetProduct({ id });
-  const feedback = useGetFeedBackByProduct({ id });
+  const feedback = useGetFeedBackByProduct({ id, tags });
   const vote = useVote();
   const { toast } = useToast();
+  const sortedFeedback = React.useMemo(() => {
+    const newData =
+      sort === "acc"
+        ? feedback.data?.toSorted(
+            (a, b) => Number(b.upvotes) - Number(a.upvotes),
+          )
+        : feedback.data?.toSorted(
+            (a, b) => Number(a.upvotes) - Number(b.upvotes),
+          );
+    return newData;
+  }, [sort, feedback.data]);
+
   return (
     <div className="dark min-h-screen bg-slate-950 p-4 lg:p-8 w-screen">
       <div className="mx-auto max-w-6xl grid gap-6 lg:grid-cols-[270px,1fr]">
@@ -58,39 +77,119 @@ export default function FeedBackBoard({ id }: { id: bigint }) {
             <div className="flex flex-wrap gap-2">
               <Badge
                 variant="secondary"
-                className="bg-slate-800 hover:bg-slate-700"
+                className={clsx("bg-slate-800 hover:bg-slate-700", {
+                  "bg-blue-600 hover:bg-blue-400": tags?.includes("All"),
+                })}
+                onClick={() =>
+                  setTags(
+                    tags
+                      ? (prev) =>
+                          prev?.includes("All")
+                            ? prev?.filter((t) => t !== "All")
+                            : [...prev!, "All"]
+                      : ["All"],
+                  )
+                }
               >
                 All
               </Badge>
               <Badge
                 variant="secondary"
-                className="bg-slate-800 hover:bg-slate-700"
+                className={clsx("bg-slate-800 hover:bg-slate-700", {
+                  "bg-blue-600 hover:bg-blue-400": tags?.includes("UI"),
+                })}
+                onClick={() =>
+                  setTags(
+                    tags
+                      ? (prev) =>
+                          prev?.includes("UI")
+                            ? prev?.filter((t) => t !== "UI")
+                            : [...prev!, "UI"]
+                      : ["UI"],
+                  )
+                }
               >
                 UI
               </Badge>
               <Badge
                 variant="secondary"
-                className="bg-slate-800 hover:bg-slate-700"
+                className={clsx("bg-slate-800 hover:bg-slate-700", {
+                  "bg-blue-600 hover:bg-blue-400": tags?.includes("UX"),
+                })}
+                onClick={() =>
+                  setTags(
+                    tags
+                      ? (prev) =>
+                          prev?.includes("UX")
+                            ? prev?.filter((t) => t !== "UX")
+                            : [...prev!, "UX"]
+                      : ["UX"],
+                  )
+                }
               >
                 UX
               </Badge>
               <Badge
                 variant="secondary"
-                className="bg-slate-800 hover:bg-slate-700"
+                className={clsx("bg-slate-800 hover:bg-slate-700", {
+                  "bg-blue-600 hover:bg-blue-400":
+                    tags?.includes("Enhancement"),
+                })}
+                onClick={() =>
+                  setTags(
+                    tags
+                      ? (prev) =>
+                          prev?.includes("Enhancement")
+                            ? prev?.filter((t) => t !== "Enhancement")
+                            : [...prev!, "Enhancement"]
+                      : ["Enhancement"],
+                  )
+                }
               >
                 Enhancement
               </Badge>
               <Badge
                 variant="secondary"
-                className="bg-slate-800 hover:bg-slate-700"
+                className={clsx("bg-slate-800 hover:bg-slate-700", {
+                  "bg-blue-600 hover:bg-blue-400": tags?.includes("Bug"),
+                })}
+                onClick={() =>
+                  setTags(
+                    tags
+                      ? (prev) =>
+                          prev?.includes("Bug")
+                            ? prev?.filter((t) => t !== "Bug")
+                            : [...prev!, "Bug"]
+                      : ["Bug"],
+                  )
+                }
               >
                 Bug
               </Badge>
               <Badge
                 variant="secondary"
-                className="bg-slate-800 hover:bg-slate-700"
+                className={clsx("bg-slate-800 hover:bg-slate-700", {
+                  "bg-blue-600 hover:bg-blue-400": tags?.includes("Feature"),
+                })}
+                onClick={() =>
+                  setTags(
+                    tags
+                      ? (prev) =>
+                          prev?.includes("Feature")
+                            ? prev?.filter((t) => t !== "Feature")
+                            : [...prev!, "Feature"]
+                      : ["Feature"],
+                  )
+                }
               >
                 Feature
+              </Badge>
+              <Badge
+                variant="secondary"
+                className="bg-slate-800 hover:bg-slate-700"
+                onClick={() => setTags(null)}
+              >
+                Clear
               </Badge>
             </div>
           </Card>
@@ -100,14 +199,16 @@ export default function FeedBackBoard({ id }: { id: bigint }) {
           <div className="bg-slate-900 rounded-lg p-4 flex items-center justify-between border border-slate-800">
             <div className="flex items-center gap-4 text-slate-200">
               <span>{feedback.data?.length} Suggestions</span>
-              <Select defaultValue="most">
+              <Select
+                defaultValue="acc"
+                onValueChange={(event) => setSort(event)}
+              >
                 <SelectTrigger className="w-[180px] border-0 bg-transparent text-slate-200">
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
                 <SelectContent className="bg-slate-900 border-slate-800">
-                  <SelectItem value="most">Most Upvotes</SelectItem>
-                  <SelectItem value="least">Least Upvotes</SelectItem>
-                  <SelectItem value="comments">Most Comments</SelectItem>
+                  <SelectItem value="acc">Most Upvotes</SelectItem>
+                  <SelectItem value="desc">Least Upvotes</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -121,7 +222,7 @@ export default function FeedBackBoard({ id }: { id: bigint }) {
           {match(feedback.isLoading)
             .with(true, () => <LoaderPinwheelIcon className="animate-spin" />)
             .with(false, () => {
-              return feedback.data?.map((feed) => (
+              return sortedFeedback?.map((feed) => (
                 <Card
                   className="p-6 bg-slate-900 border-slate-800"
                   key={feed.id}

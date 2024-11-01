@@ -14,10 +14,26 @@ import { useGetAllProducts, useGetProductsCount } from "@/app/hooks/products";
 import { match } from "ts-pattern";
 import { ProductForm } from "./product-form";
 import Link from "next/link";
+import { useQueryState } from "nuqs";
+import React from "react";
 
 export function ProductBoard() {
   const products = useGetAllProducts();
   const count = useGetProductsCount();
+  const [sort, setSort] = useQueryState("sort", {
+    defaultValue: "acc",
+  });
+  const sortedProduct = React.useMemo(() => {
+    const newData =
+      sort === "acc"
+        ? products.data?.toSorted(
+            (a, b) => Number(b.feedbackCount) - Number(a.feedbackCount),
+          )
+        : products.data?.toSorted(
+            (a, b) => Number(a.feedbackCount) - Number(b.feedbackCount),
+          );
+    return newData;
+  }, [sort, products.data]);
   return (
     <div className="dark min-h-screen bg-slate-950 p-4 lg:p-8">
       <div className="flex flex-col gap-2 w-full">
@@ -25,12 +41,18 @@ export function ProductBoard() {
           <div className="bg-slate-900 rounded-lg p-4 flex items-center justify-between border border-slate-800">
             <div className="flex items-center gap-4 text-slate-200">
               <span>{count?.data ? Number(count.data) : 0} Products</span>
-              <Select defaultValue="feedbacks">
+              <Select
+                defaultValue="acc"
+                onValueChange={(event) => {
+                  setSort(event);
+                }}
+              >
                 <SelectTrigger className="w-[180px] border-0 bg-transparent text-slate-200">
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
                 <SelectContent className="bg-slate-900 border-slate-800">
-                  <SelectItem value="feedbacks">Most Comments</SelectItem>
+                  <SelectItem value="acc">Most Comments</SelectItem>
+                  <SelectItem value="desc">Least Comments</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -43,7 +65,7 @@ export function ProductBoard() {
           {match(products.isLoading)
             .with(true, () => <LoaderPinwheelIcon className="animate-spin" />)
             .with(false, () =>
-              products.data?.map((product) => (
+              sortedProduct?.map((product) => (
                 <Link
                   key={Number(product.id)}
                   href={`products/${Number(product.id).toString()}`}

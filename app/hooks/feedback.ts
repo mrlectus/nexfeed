@@ -7,7 +7,13 @@ import {
   waitForTransactionReceipt,
 } from "@wagmi/core";
 
-export const useGetFeedBackByProduct = ({ id }: { id: bigint }) => {
+export const useGetFeedBackByProduct = ({
+  id,
+  tags,
+}: {
+  id: bigint;
+  tags?: Array<string> | undefined;
+}) => {
   const getFeedBackByProduct = async ({ id }: { id: bigint }) => {
     const feedbacks = await readContract(config, {
       abi: ABIF,
@@ -20,6 +26,7 @@ export const useGetFeedBackByProduct = ({ id }: { id: bigint }) => {
   return useQuery({
     queryKey: ["feedbacks", Number(id)],
     queryFn: () => getFeedBackByProduct({ id }),
+    select: (tag) => (!tags ? tag : tag?.filter((t) => tags?.includes(t.tag))),
     enabled: !!id,
   });
 };

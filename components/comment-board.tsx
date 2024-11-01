@@ -66,7 +66,11 @@ export function CommentBoard({
           <ArrowLeft className="w-4 h-4" />
           Go Back
         </Button>
-        <Button className="bg-blue-600 text-white hover:bg-blue-700">
+        <Button
+          disabled
+          title="coming soon"
+          className="bg-blue-600 text-white hover:bg-blue-700"
+        >
           Edit Feedback
         </Button>
       </div>
@@ -174,9 +178,9 @@ export function CommentBoard({
                       @{comment.commenter.slice(0, 7)}
                     </p>
                   </div>
-                  <Button variant="link" className="text-blue-400">
-                    Reply
-                  </Button>
+                  {/* <Button variant="link" className="text-blue-400"> */}
+                  {/*   Reply */}
+                  {/* </Button> */}
                 </div>
                 <p className="mt-2 text-gray-300">{comment.text}</p>
               </div>

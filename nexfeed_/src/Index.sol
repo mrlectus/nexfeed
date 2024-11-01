@@ -7,7 +7,7 @@ contract ProductContract {
         string name;
         string description;
         address creator;
-        uint feedbackCount;  // Feedback count is now part of each product
+        uint feedbackCount;
     }
 
     uint public productCount;
@@ -37,23 +37,18 @@ contract ProductContract {
             name: _name,
             description: _description,
             creator: msg.sender,
-            feedbackCount: 0  // Initialize feedback count to 0
+            feedbackCount: 0
         });
 
         emit ProductAdded(productCount, msg.sender, _name, _description);
     }
 
-    function addFeedback(uint _productId) public {
-        // Ensure product exists
-        require(_productId > 0 && _productId <= productCount, "Product does not exist");
-
-        // Increment the feedback count directly in the product struct
-        products[_productId].feedbackCount++;
-        emit FeedbackAdded(_productId);
-    }
-
     function getProduct(uint _productId) public view returns (Product memory) {
         return products[_productId];
+    }
+
+    function incrementFeedbackCount(uint _productId) public {
+        products[_productId].feedbackCount++;
     }
 
     function getAllProducts() public view returns (Product[] memory) {
@@ -107,15 +102,15 @@ contract FeedbackContract {
     mapping(uint => uint[]) public productFeedbacks;
 
     address public owner;
-    uint public upvoteFee = 0.00007874 ether;       // Fee for upvoting
-    uint public feedbackFee = 0.00003937 ether;      // Fee for posting feedback
-    uint public commentFee = 0.00003937 ether;     // Fee for adding a comment
+    uint public upvoteFee = 0.00007874 ether;
+    uint public feedbackFee = 0.00003937 ether;
+    uint public commentFee = 0.00003937 ether;
+
+    ProductContract public productContract;
 
     event FeedbackPosted(uint feedbackId, uint productId, address author, string title, string description, string tag);
     event FeedbackVoted(uint feedbackId, bool upvote, address voter);
     event CommentAdded(uint feedbackId, address commenter, string text);
-
-    ProductContract public productContract;
 
     constructor(address _productContractAddress) {
         productContract = ProductContract(_productContractAddress);
@@ -144,6 +139,8 @@ contract FeedbackContract {
         newFeedback.downvotes = 0;
 
         productFeedbacks[_productId].push(feedbackCount);
+
+        productContract.incrementFeedbackCount(_productId);
 
         emit FeedbackPosted(feedbackCount, _productId, msg.sender, _title, _description, _tag);
     }
@@ -198,3 +195,4 @@ contract FeedbackContract {
         payable(owner).transfer(address(this).balance);
     }
 }
+

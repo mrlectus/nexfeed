@@ -488,13 +488,6 @@ export const productContractAbi = [
   { type: 'constructor', inputs: [], stateMutability: 'nonpayable' },
   {
     type: 'function',
-    inputs: [{ name: '_productId', internalType: 'uint256', type: 'uint256' }],
-    name: 'addFeedback',
-    outputs: [],
-    stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
     inputs: [
       { name: '_name', internalType: 'string', type: 'string' },
       { name: '_description', internalType: 'string', type: 'string' },
@@ -549,6 +542,13 @@ export const productContractAbi = [
       },
     ],
     stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '_productId', internalType: 'uint256', type: 'uint256' }],
+    name: 'incrementFeedbackCount',
+    outputs: [],
+    stateMutability: 'nonpayable',
   },
   {
     type: 'function',
@@ -1110,21 +1110,21 @@ export const useWriteProductContractundefined =
   /*#__PURE__*/ createUseWriteContract({ abi: productContractAbi })
 
 /**
- * Wraps __{@link useWriteContract}__ with `abi` set to __{@link productContractAbi}__ and `functionName` set to `"addFeedback"`
- */
-export const useWriteProductContractAddFeedback =
-  /*#__PURE__*/ createUseWriteContract({
-    abi: productContractAbi,
-    functionName: 'addFeedback',
-  })
-
-/**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link productContractAbi}__ and `functionName` set to `"addProduct"`
  */
 export const useWriteProductContractAddProduct =
   /*#__PURE__*/ createUseWriteContract({
     abi: productContractAbi,
     functionName: 'addProduct',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link productContractAbi}__ and `functionName` set to `"incrementFeedbackCount"`
+ */
+export const useWriteProductContractIncrementFeedbackCount =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: productContractAbi,
+    functionName: 'incrementFeedbackCount',
   })
 
 /**
@@ -1143,21 +1143,21 @@ export const useSimulateProductContractundefined =
   /*#__PURE__*/ createUseSimulateContract({ abi: productContractAbi })
 
 /**
- * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link productContractAbi}__ and `functionName` set to `"addFeedback"`
- */
-export const useSimulateProductContractAddFeedback =
-  /*#__PURE__*/ createUseSimulateContract({
-    abi: productContractAbi,
-    functionName: 'addFeedback',
-  })
-
-/**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link productContractAbi}__ and `functionName` set to `"addProduct"`
  */
 export const useSimulateProductContractAddProduct =
   /*#__PURE__*/ createUseSimulateContract({
     abi: productContractAbi,
     functionName: 'addProduct',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link productContractAbi}__ and `functionName` set to `"incrementFeedbackCount"`
+ */
+export const useSimulateProductContractIncrementFeedbackCount =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: productContractAbi,
+    functionName: 'incrementFeedbackCount',
   })
 
 /**
