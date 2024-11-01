@@ -26,7 +26,8 @@ import Link from "next/link";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 import React from "react";
 import clsx from "clsx";
-export default function FeedBackBoard({ id }: { id: bigint }) {
+
+export function FeedBackBoard({ id }: { id: bigint }) {
   const [tags, setTags] = useQueryState("tags", parseAsArrayOf(parseAsString));
   const [sort, setSort] = useQueryState("sort", {
     defaultValue: "acc",

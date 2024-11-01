@@ -1,4 +1,4 @@
-import FeedBackBoard from "@/components/feedback-board";
+import { FeedBackBoard } from "@/components/feedback-board";
 
 const SingleProdectPage = async ({ params }: { params: { id: bigint } }) => {
   return (
