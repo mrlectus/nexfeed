@@ -33,7 +33,7 @@ export function ProductBoard() {
             (a, b) => Number(a.feedbackCount) - Number(b.feedbackCount),
           );
     return newData;
-  }, [sort, products.data]);
+  }, [sort, products?.data]);
   return (
     <div className="dark min-h-screen bg-slate-950 p-4 lg:p-8">
       <div className="flex flex-col gap-2 w-full">

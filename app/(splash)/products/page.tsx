@@ -1,4 +1,3 @@
-import { useAddProduct, useGetAllProducts } from "@/app/hooks/products";
 import { ProductBoard } from "@/components/product-board";
 
 export default function ProductPage() {

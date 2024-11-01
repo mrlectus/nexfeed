@@ -15,7 +15,7 @@ import { defineChain } from "viem";
 
 const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string;
 
-const localhost = defineChain({
+export const localhost = defineChain({
   id: 31337,
   name: "Anvil Foundry",
   nativeCurrency: {
