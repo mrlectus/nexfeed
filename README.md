@@ -1,7 +1,6 @@
 # NexFeed
 
-
-https://github.com/user-attachments/assets/6594f8fe-338c-4150-b691-641aae3e1fef
+https://youtu.be/183uU_XrUao
 
 [Live Link](https://nexfeed.vercel.app/)
 
