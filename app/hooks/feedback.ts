@@ -12,7 +12,7 @@ export const useGetFeedBackByProduct = ({
   tags,
 }: {
   id: bigint;
-  tags?: Array<string> | undefined;
+  tags?: Array<string> | null;
 }) => {
   const getFeedBackByProduct = async ({ id }: { id: bigint }) => {
     const feedbacks = await readContract(config, {
