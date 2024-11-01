@@ -1,6 +1,6 @@
 # NexFeed
 
-https://youtu.be/183uU_XrUao
+[Video Link](https://youtu.be/183uU_XrUao)
 
 [Live Link](https://nexfeed.vercel.app/)
 
