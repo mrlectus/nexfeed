@@ -1,58 +1,49 @@
-# Welcome to your Convex + Next.js + Convex Auth app
+# NexFeed
 
-This is a [Convex](https://convex.dev/) project created with [`npm create convex`](https://www.npmjs.com/package/create-convex).
+## Introduction
 
-After the initial setup (<2 minutes) you'll have a working full-stack app using:
+In today's digital marketplace, consumer feedback is essential for product improvement and customer satisfaction. Traditional feedback systems often lack transparency and can be influenced by biases. To address these issues, we present NexFeed, a decentralized application that empowers users to share their opinions on products while ensuring that all interactions are secure, transparent, and immutable.
 
-- Convex as your backend (database, server logic)
-- [Convex Auth](https://labs.convex.dev/auth) for your authentication implementation
-- [React](https://react.dev/) as your frontend (web page interactivity)
-- [Next.js](https://nextjs.org/) for optimized web hosting and page routing
-- [Tailwind](https://tailwindcss.com/) and [shadcn/ui](https://ui.shadcn.com/) for building great looking accessible UI fast
+**NexFeed** is built on the Arbitrum network, a layer-2 scaling solution for Ethereum that enhances transaction speed and reduces costs while maintaining the security and decentralization of the Ethereum blockchain. By leveraging Arbitrum's capabilities, NexFeed allows users to seamlessly add products, provide feedback, and interact with others in a trustless environment.
 
-## Get started
+Utilizing smart contracts, NexFeed ensures that all feedback is permanently recorded and can be easily accessed and verified by anyone. Users can upvote or downvote feedback, facilitating a community-driven evaluation of products that enhances decision-making for potential buyers.
 
-If you just cloned this codebase and didn't use `npm create convex`, run:
+With NexFeed, we aim to create a robust platform that fosters genuine product reviews and cultivates a transparent ecosystem for consumers and creators alike.
 
-```
-npm install
-npm run dev
-```
+### What’s the name of your project?
 
-If you're reading this README on GitHub and want to use this template, run:
+The name of this Project is NexFeed
 
-```
-npm create convex@latest -- -t nextjs-convexauth-shadcn
-```
+### What does your project do?
 
-## The app
+NexFeed is a decentralized application that allows users to share feedback on products in a secure and transparent environment. Built on the Arbitrum network, it enables users to add products, post feedback, and interact with others through upvotes and downvotes. By leveraging blockchain technology, NexFeed ensures that all feedback is permanently recorded and verifiable, fostering a genuine community-driven platform for product evaluation.
 
-The app is a basic multi-user chat. Walkthrough of the source code:
+### What problem does it solve?
 
-- [convex/auth.ts](./convex/auth.ts) configures the available authentication methods
-- [convex/messages.ts](./convex/messages.ts) is the chat backend implementation
-- [middleware.ts](./middleware.ts) determines which pages require sign-in
-- [app/layout.tsx](./app/layout.tsx) is the main app layout
-- [app/(splash)/page.tsx](<./app/(splash)/page.tsx>) is the splash page (doesn't require sign-in)
-- [app/product/layout.tsx](./app/product/layout.tsx) is the "product" layout for the [product page](./app/product/page.tsx) (requires sign-in)
-- [app/signin/page.tsx](./app/signin/page.tsx) is the sign-in page
-- [app/product/Chat/Chat.tsx](./app/product/Chat/Chat.tsx) is the chat frontend
+NexFeed addresses the lack of transparency and trust in traditional feedback systems. By using blockchain technology, it eliminates biases and ensures that all product feedback is securely recorded and publicly verifiable. This creates a reliable environment for consumers to share their opinions and make informed purchasing decisions, while also enabling creators to receive genuine insights into their products.
 
-## Configuring other authentication methods
+### Why is your project needed?
 
-To configure different authentication methods, see [Configuration](https://labs.convex.dev/auth/config) in the Convex Auth docs.
+NexFeed is needed to enhance the credibility and effectiveness of product feedback in an increasingly digital marketplace. Traditional review systems often suffer from manipulation, bias, and lack of transparency, leading to unreliable information for consumers. By providing a decentralized platform, NexFeed fosters genuine interactions and trust among users, ensuring that feedback is authentic and accessible. This empowers consumers to make informed choices and helps businesses understand their products better, ultimately improving customer satisfaction and product quality.
 
-## Learn more
+### What value does it bring to its target audience?
 
-To learn more about developing your project with Convex, check out:
+NexFeed brings significant value to its target audience by providing a trustworthy platform for sharing and accessing product feedback. For consumers, it offers a reliable source of authentic reviews, enabling informed purchasing decisions and fostering confidence in their choices. For businesses and creators, NexFeed delivers valuable insights into customer perceptions and preferences, allowing them to improve their products based on genuine feedback. Overall, NexFeed enhances the interaction between consumers and creators, promoting transparency, engagement, and continuous improvement in the marketplace.
 
-- The [Tour of Convex](https://docs.convex.dev/get-started) for a thorough introduction to Convex principles.
-- The rest of [Convex docs](https://docs.convex.dev/) to learn about all Convex features.
-- [Stack](https://stack.convex.dev/) for in-depth articles on advanced topics.
+## Features
 
-## Join the community
+NexFeed offers a range of robust features designed to enhance user experience and promote meaningful interactions within the platform:
 
-Join thousands of developers building full-stack apps with Convex:
+1. Product Submission: Users can easily add new products to the platform, providing essential details such as product name, description, and relevant categories.
 
-- Join the [Convex Discord community](https://convex.dev/community) to get help in real-time.
-- Follow [Convex on GitHub](https://github.com/get-convex/), star and contribute to the open-source implementation of Convex.
+2. Feedback Posting: Users can leave detailed feedback on products, sharing their experiences and opinions to help others make informed decisions.
+
+3. Upvoting and Downvoting: To prioritize valuable insights, users can upvote or downvote feedback, allowing the community to highlight the most helpful contributions.
+
+4. Commenting: Users can engage in discussions by commenting on feedback, fostering a community dialogue around products and experiences.
+
+5. Immutable Records: All feedback and product submissions are recorded on the blockchain, ensuring transparency and permanence, so that users can trust the integrity of the information.
+
+6. Search and Filter Options: Users can easily search for specific products or filter feedback based on criteria such as ratings, recency, or relevance, making navigation intuitive and efficient.
+
+7. A small Fee for all mutations to ensure quality of post, comments and upvotes.
